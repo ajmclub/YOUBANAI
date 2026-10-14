@@ -1,0 +1,95 @@
+==============================================================================
+游伴 AI · 交付一致性终检
+==============================================================================
+
+【一、交付文件完整性】
+  [OK ] README.md   31830 B
+  [OK ] requirements.txt   452 B
+  [OK ] run.py   3509 B
+  [OK ] 启动游伴AI.bat   1771 B
+  [OK ] app/__init__.py   195 B
+  [OK ] app/main.py   6950 B
+  [OK ] app/config.py   3778 B
+  [OK ] app/db.py   4611 B
+  [OK ] app/schema.sql   13141 B
+  [OK ] app/seed.py   17199 B
+  [OK ] app/seed_data.py   65611 B
+  [OK ] app/utils.py   4158 B
+  [OK ] app/engines/__init__.py   107 B
+  [OK ] app/engines/geo.py   2394 B
+  [OK ] app/engines/story.py   11197 B
+  [OK ] app/engines/growth.py   12731 B
+  [OK ] app/engines/chat.py   9788 B
+  [OK ] app/engines/story_engine.py   28750 B
+  [OK ] app/routers/__init__.py   36 B
+  [OK ] app/routers/c_end.py   31696 B
+  [OK ] app/routers/admin.py   41236 B
+  [OK ] web/index.html   23372 B
+  [OK ] web/c/index.html   7449 B
+  [OK ] web/c/app.css   64641 B
+  [OK ] web/c/app.js   91487 B
+  [OK ] web/admin/index.html   12494 B
+  [OK ] web/admin/app.css   37607 B
+  [OK ] web/admin/app.js   127657 B
+  [OK ] docs/API.md   34427 B
+  [OK ] docs/产品设计说明书.md   48434 B
+  [OK ] docs/技术架构.md   58099 B
+  [OK ] docs/数据模型.md   46781 B
+  [OK ] docs/原型对照表.md   45428 B
+  [OK ] docs/延展路线图.md   27280 B
+  [OK ] tests/e2e_check.py   16594 B
+  [OK ] tests/contract_check.py   7444 B
+  [OK ] tests/browser_check.py   46190 B
+  [OK ] tests/inspect_data.py   8338 B
+
+【二、无残留临时/调试文件】
+  [BAD] 无临时文件残留   ['_tmp']
+
+【三、数据库结构】
+  [OK ] schema.sql 表数 == 数据库表数   schema 26 / db 26
+       表（26）：activation_codes, ai_jobs, badges, chapters, characters, cooperations, devices, events, materials, metrics_daily, node_links, node_visits, nodes, parks, progress, revenue, revenue_shares, scenarios, skus, task_submissions, tasks, user_badges, user_growth, user_items, users, wardrobe_items
+       索引（8）：idx_chapters_scenario, idx_events_park, idx_materials_park, idx_nodes_scenario, idx_subs_user, idx_tasks_node, idx_tasks_scenario, idx_visits_user
+
+【四、接口规模】
+       总操作数 43 · C 端 16 · B 端 24 · 系统 3
+  [OK ] 接口规模合理（C≥12, B≥20）   C=16 B=24
+
+【五、种子数据规模（与文档/原型对照）】
+       景区 parks           12
+       剧本 scenarios       8
+       章节 chapters        31
+       剧情节点 nodes         51
+       任务 tasks           63
+       徽章 badges          24
+       素材 materials       441
+       用户 users           6
+       潮玩 SKU             6
+       装扮 wardrobe        11
+  [OK ] 素材：439 条已入库 + 2 条解析中 = 441   indexed=439 parsing=2
+  [OK ] 六分类条数与原型一致 128/96/42/61/78/34   {'architecture': 96, 'geo': 34, 'heritage': 42, 'history': 128, 'legend': 61, 'nature': 78}
+
+【六、演示账号状态（对齐 C 端原型）】
+  [OK ] 昵称/等级/成长值 = Lv.3 / 361   Lv.3 361
+  [OK ] 成长五维度 78/62/85/70/66   {'courage': 66, 'create': 62, 'explore': 78, 'knowledge': 70, 'observe': 85}
+  [OK ] 徽章 8 / 24   8/24
+  [OK ] 《大唐密令》第 3 章 60% 进行中   第3章 60% ongoing
+  [OK ] 已探索 6/10 剧情点   6/10
+  [OK ] 已点亮 5 座城市   5
+  [OK ] 当前节点 = 密令现世   密令现世
+  [OK ] 当前任务进度 1/3   找出塔身上 3 个特殊符号 1/3
+
+【七、文档中的关键数字与实际一致】
+  [OK ] README 提到 26 张表
+  [OK ] README 提到 439 条素材
+  [OK ] README 提到 12 景区
+  [OK ] README 提到 6 剧本
+  [OK ] README 提到 49 接口自检
+  [OK ] README 提到 90 项浏览器验证
+  [OK ] API.md 收录 node_place
+  [OK ] API.md 收录 iptoys/editions
+  [OK ] API.md 中所有 /api/ 路径后端均存在   []
+
+==============================================================================
+【结论】1 项不通过 · 共检查 60 项
+    ✗ 无临时文件残留
+==============================================================================

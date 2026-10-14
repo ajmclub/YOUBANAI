@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>游伴 AI · YOUBAN AI · AI 旅行潮玩平台</title>
+<style>
+:root{
+  --night:#0B1020; --night2:#0E1428; --panel:#141A2E; --panel2:#1A2138;
+  --warm:#F5F1E8; --text2:#A9B0C4; --text3:#6E7691;
+  --gold:#E8B45A; --gold-l:#F2CC84; --gold-bg:rgba(232,180,90,.13);
+  --forest:#4FA08C; --forest-bg:rgba(79,160,140,.14);
+  --orange:#F0873F; --purple:#BBA5F5; --blue:#8FB2FF;
+  --line:rgba(255,255,255,.07);
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--night); color:var(--warm); min-height:100vh;
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(232,180,90,.14), transparent 42%),
+    radial-gradient(circle at 88% 14%, rgba(79,160,140,.12), transparent 44%),
+    radial-gradient(circle at 55% 100%, rgba(187,165,245,.10), transparent 50%);
+}
+.wrap{position:relative; z-index:1; max-width:1180px; margin:0 auto; padding:0 28px 100px}
+
+/* ---------------- 顶栏 ---------------- */
+header{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:26px 0 20px; gap:20px; flex-wrap:wrap;
+}
+.logo{display:flex; align-items:center; gap:13px}
+.logo-mark{
+  width:46px; height:46px; border-radius:14px; flex:none;
+  background:radial-gradient(circle at 50% 32%, rgba(232,180,90,.36), rgba(232,180,90,.06));
+  border:1px solid rgba(232,180,90,.4); display:flex; align-items:center; justify-content:center;
+  font-size:22px; box-shadow:0 0 30px rgba(232,180,90,.22);
+}
+.logo b{display:block; font-size:18px; letter-spacing:.5px}
+.logo b em{font-style:normal; color:var(--gold)}
+.logo span{display:block; font-size:11px; color:var(--text3); letter-spacing:2px; margin-top:3px}
+.navlinks{display:flex; gap:9px; flex-wrap:wrap}
+.navlinks a{
+  color:var(--text2); text-decoration:none; font-size:12.5px; padding:8px 15px;
+  border-radius:20px; border:1px solid var(--line); transition:.3s var(--ease);
+}
+.navlinks a:hover{color:var(--gold); border-color:rgba(232,180,90,.45); background:var(--gold-bg)}
+
+/* ---------------- Hero ---------------- */
+.hero{padding:52px 0 46px; text-align:center}
+.hero .kicker{
+  font-size:11px; letter-spacing:5px; color:var(--gold); opacity:.85; margin-bottom:20px;
+}
+.hero h1{
+  font-size:clamp(34px,6vw,62px); font-weight:800; letter-spacing:1px; line-height:1.22;
+  background:linear-gradient(120deg,#F5F1E8 10%,var(--gold) 52%,var(--gold-l) 90%);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+.hero .sub{margin-top:20px; font-size:14.5px; color:var(--text2); letter-spacing:1.6px}
+.hero .chips{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:26px}
+.hero .chips span{
+  font-size:11.5px; padding:7px 15px; border-radius:18px;
+  background:rgba(255,255,255,.035); border:1px solid var(--line); color:var(--text2);
+}
+.hero .vision{
+  margin-top:30px; font-size:13px; color:var(--text3); font-style:italic; letter-spacing:.4px;
+}
+
+/* ---------------- 入口卡 ---------------- */
+.entries{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:16px}
+.entry{
+  position:relative; display:block; text-decoration:none; color:inherit; overflow:hidden;
+  background:linear-gradient(160deg,var(--panel),var(--night2));
+  border:1px solid var(--line); border-radius:22px; padding:26px 24px 24px;
+  transition:.45s var(--ease);
+}
+.entry::after{
+  content:""; position:absolute; inset:0; opacity:0; transition:.45s var(--ease);
+  background:radial-gradient(circle at 50% 0%, rgba(232,180,90,.16), transparent 62%);
+}
+.entry:hover{transform:translateY(-5px); border-color:rgba(232,180,90,.42);
+  box-shadow:0 18px 46px rgba(0,0,0,.5), 0 0 40px rgba(232,180,90,.13)}
+.entry:hover::after{opacity:1}
+.entry .e-ic{
+  position:relative; width:52px; height:52px; border-radius:16px; margin-bottom:18px;
+  display:flex; align-items:center; justify-content:center; font-size:25px;
+  background:var(--gold-bg); border:1px solid rgba(232,180,90,.3);
+}
+.entry h3{position:relative; font-size:17px; margin-bottom:9px}
+.entry p{position:relative; font-size:12.5px; color:var(--text2); line-height:1.85; min-height:66px}
+.entry .e-go{
+  position:relative; margin-top:16px; font-size:12px; color:var(--gold);
+  display:flex; align-items:center; gap:7px; letter-spacing:.6px;
+}
+.entry .e-go i{transition:.35s var(--ease); font-style:normal}
+.entry:hover .e-go i{transform:translateX(5px)}
+
+/* ---------------- 数据条 ---------------- */
+.stats{
+  display:grid; grid-template-columns:repeat(6,1fr); gap:1px; margin-top:52px;
+  background:var(--line); border:1px solid var(--line); border-radius:18px; overflow:hidden;
+}
+.stat{background:var(--night2); padding:22px 12px; text-align:center}
+.stat b{display:block; font-size:23px; color:var(--gold); letter-spacing:.5px}
+.stat span{display:block; font-size:11px; color:var(--text3); margin-top:7px}
+
+/* ---------------- 通用区 ---------------- */
+section{margin-top:64px}
+.sec-h{display:flex; align-items:flex-end; justify-content:space-between;
+  gap:16px; margin-bottom:22px; flex-wrap:wrap}
+.sec-h h2{font-size:21px; letter-spacing:.6px}
+.sec-h h2 em{font-style:normal; color:var(--gold)}
+.sec-h p{font-size:12.5px; color:var(--text3)}
+
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+.grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+.card{
+  background:linear-gradient(160deg,var(--panel),var(--night2));
+  border:1px solid var(--line); border-radius:20px; padding:22px 22px 20px;
+}
+.card h4{font-size:14.5px; margin-bottom:14px; display:flex; align-items:center; gap:9px}
+.card h4 .dot{width:7px; height:7px; border-radius:50%; background:var(--gold); flex:none;
+  box-shadow:0 0 10px rgba(232,180,90,.7)}
+.row{
+  display:flex; align-items:center; gap:12px; padding:11px 0;
+  border-bottom:1px solid rgba(255,255,255,.045); font-size:12.5px;
+}
+.row:last-child{border-bottom:none}
+.row .k{color:var(--text2); flex:1}
+.row .v{color:var(--warm); font-variant-numeric:tabular-nums}
+.row .v.gold{color:var(--gold)}
+.row .v.forest{color:var(--forest)}
+.tag{
+  font-size:10.5px; padding:3px 10px; border-radius:11px; white-space:nowrap;
+  background:var(--gold-bg); color:var(--gold); border:1px solid rgba(232,180,90,.28);
+}
+.tag.green{background:var(--forest-bg); color:#6FD3B8; border-color:rgba(79,160,140,.3)}
+.tag.gray{background:rgba(255,255,255,.05); color:var(--text3); border-color:var(--line)}
+
+/* 闭环步骤 */
+.flow{display:flex; align-items:center; gap:9px; flex-wrap:wrap; margin-top:6px}
+.flow .step{
+  font-size:11.5px; padding:9px 14px; border-radius:13px; color:var(--text2);
+  background:rgba(255,255,255,.035); border:1px solid var(--line);
+}
+.flow .step b{color:var(--gold); font-weight:600}
+.flow .arw{color:var(--text3); font-size:13px}
+
+/* 城市 */
+.cities{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+.city{
+  display:flex; align-items:center; gap:11px; padding:13px 14px; border-radius:15px;
+  background:rgba(255,255,255,.028); border:1px solid var(--line);
+}
+.city.lit{border-color:rgba(232,180,90,.34); background:radial-gradient(circle at 20% 30%,rgba(232,180,90,.14),rgba(255,255,255,.028))}
+.city .ci{font-size:19px; flex:none}
+.city .cb{min-width:0}
+.city .cb b{display:block; font-size:12.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.city .cb span{display:block; font-size:10.5px; color:var(--text3); margin-top:2px}
+.city.locked .ci{filter:grayscale(1) opacity(.4)}
+
+/* 命令块 */
+pre{
+  background:#080D1A; border:1px solid var(--line); border-radius:14px;
+  padding:16px 18px; overflow-x:auto; font-size:12px; line-height:1.9;
+  font-family:"Cascadia Code",Consolas,monospace; color:#CBD3E6;
+}
+pre .c{color:var(--text3)}
+pre .g{color:var(--gold)}
+code{
+  background:rgba(255,255,255,.06); padding:2px 6px; border-radius:5px;
+  font-family:"Cascadia Code",Consolas,monospace; font-size:12px; color:var(--gold-l);
+}
+
+footer{
+  margin-top:76px; padding-top:28px; border-top:1px solid var(--line);
+  text-align:center; font-size:11.5px; color:var(--text3); line-height:2.1;
+}
+footer .nex{color:var(--gold); letter-spacing:3px}
+
+@media (max-width:900px){
+  .entries,.grid3{grid-template-columns:1fr}
+  .grid2{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(3,1fr)}
+  .cities{grid-template-columns:1fr 1fr}
+}
+@media (max-width:560px){
+  .wrap{padding:0 18px 70px}
+  .hero{padding:34px 0 30px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .cities{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="logo">
+      <div class="logo-mark">🧭</div>
+      <div>
+        <b>游伴 <em>AI</em></b>
+        <span>YOUBAN AI</span>
+      </div>
+    </div>
+    <nav class="navlinks">
+      <a href="/c/">C 端体验</a>
+      <a href="/admin/">B 端后台</a>
+      <a href="/docs">API 文档</a>
+      <a href="#engine">AI 引擎</a>
+      <a href="#stack">技术架构</a>
+      <a href="#run">快速启动</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div class="kicker">TAKE IT · TRAVEL · STORY</div>
+    <h1>带着它，去发现世界。</h1>
+    <p class="sub">AI × 潮玩 × 文旅 × 剧本游　|　儿童 AI 旅行陪伴与文旅探索平台</p>
+    <div class="chips">
+      <span>走到哪里，故事发生在哪里</span>
+      <span>位置触发 · AI 角色主动出现</span>
+      <span>一面景区，多种年龄的玩法</span>
+      <span>景区资料 → AI → 剧本游</span>
+    </div>
+    <p class="vision">让世界每一个值得去的地方，都拥有一个属于孩子的故事。</p>
+  </div>
+
+  <div class="entries">
+    <a class="entry" href="/c/">
+      <div class="e-ic">📱</div>
+      <h3>C 端 · 旅行潮玩小程序</h3>
+      <p>开箱激活潮玩 → 给伙伴取名 → 旅伴首页 / 探索地图 / AI 对话 / 剧本进度 / 我的成长。
+         包含节点剧情执行页、任务提交判定，以及面向家长的
+         <b style="color:var(--gold-l);font-weight:600">家长模式 · 成长报告</b>。</p>
+      <div class="e-go">进入体验 <i>→</i></div>
+    </a>
+    <a class="entry" href="/admin/">
+      <div class="e-ic">🖥️</div>
+      <h3>B 端 · 景区剧本游运营台</h3>
+      <p>数据看板 / 剧本管理 / 剧情编辑器 / 任务中心 / 内容素材库 / 游客管理 /
+         潮玩 IP 管理 / 数据分析 / 景区与联名 + AI 生成向导 + 运行指标。</p>
+      <div class="e-go">进入后台 <i>→</i></div>
+    </a>
+    <a class="entry" href="/docs">
+      <div class="e-ic">🔌</div>
+      <h3>API · 开放接口文档</h3>
+      <p>C 端 16 个接口 + B 端 24 个接口 + 系统 2 个（含可观测性指标），
+         共 42 条路由，Swagger 可交互调试。契约说明见 <code>docs/API.md</code>。</p>
+      <div class="e-go">查看接口 <i>→</i></div>
+    </a>
+  </div>
+
+  <div class="stats" id="stats">
+    <div class="stat"><b id="s-parks">—</b><span>景区</span></div>
+    <div class="stat"><b id="s-scenarios">—</b><span>剧本</span></div>
+    <div class="stat"><b id="s-nodes">—</b><span>剧情节点</span></div>
+    <div class="stat"><b id="s-tasks">—</b><span>任务</span></div>
+    <div class="stat"><b id="s-badges">—</b><span>徽章</span></div>
+    <div class="stat"><b id="s-materials">—</b><span>素材</span></div>
+  </div>
+
+  <!-- ---------------- 核心闭环 ---------------- -->
+  <section>
+    <div class="sec-h">
+      <h2>核心闭环 <em>走到哪里，故事发生在哪里</em></h2>
+      <p>商业计划书 P10 的完整落地</p>
+    </div>
+    <div class="card">
+      <div class="flow">
+        <div class="step"><b>位置</b> GPS / NFC / QR</div><span class="arw">→</span>
+        <div class="step"><b>识别</b> 景区与围栏</div><span class="arw">→</span>
+        <div class="step"><b>顺序解锁</b> 前置节点完成</div><span class="arw">→</span>
+        <div class="step"><b>AI</b> 阿游主动出现</div><span class="arw">→</span>
+        <div class="step"><b>任务</b> 观察/寻找/拍摄/解谜</div><span class="arw">→</span>
+        <div class="step"><b>奖励</b> 徽章/成长值/收藏</div>
+      </div>
+      <div class="grid2" style="margin-top:22px">
+        <div>
+          <div class="row"><span class="k">地理围栏判定</span><span class="v gold">Haversine ≤ radius_m</span></div>
+          <div class="row"><span class="k">景区级围栏容差</span><span class="v">1.5 × radius_m</span></div>
+          <div class="row"><span class="k">节点状态</span><span class="v">done / active / locked</span></div>
+        </div>
+        <div>
+          <div class="row"><span class="k">未解锁原因提示</span><span class="v">需要先完成「xxx」</span></div>
+          <div class="row"><span class="k">任务判定方式</span><span class="v">auto / answer / keyword / photo</span></div>
+          <div class="row"><span class="k">保底成长值</span><span class="v forest">未通过给 20%</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------------- AI 引擎 ---------------- -->
+  <section id="engine">
+    <div class="sec-h">
+      <h2>AI Story Engine <em>景区资料 → 剧本游</em></h2>
+      <p>默认离线规则引擎，可一键切换真实大模型</p>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h4><span class="dot"></span>生成链路</h4>
+        <div class="row"><span class="k">① 读取景区素材</span><span class="v gold" id="eng-material">—</span></div>
+        <div class="row"><span class="k">② 构建世界观</span><span class="v">按年龄层调整叙事基调</span></div>
+        <div class="row"><span class="k">③ 生成章节</span><span class="v">章节模板 × N</span></div>
+        <div class="row"><span class="k">④ 生成剧情节点</span><span class="v">入口/古建筑/古树/博物馆/山谷/观景台/隐藏地点/终极任务</span></div>
+        <div class="row"><span class="k">⑤ 生成任务</span><span class="v">观察 → 寻找 → 拍摄 → 解谜 轮转</span></div>
+        <div class="row"><span class="k">⑥ 生成奖励</span><span class="v">徽章体系 + 稀有度</span></div>
+        <div class="row"><span class="k">⑦ 来源溯源</span><span class="v">每个节点标注引用素材</span></div>
+        <div class="row"><span class="k">⑧ 入库草稿剧本</span><span class="v forest">含节点坐标自动布局</span></div>
+      </div>
+      <div class="card">
+        <h4><span class="dot"></span>引擎状态</h4>
+        <div class="row"><span class="k">当前引擎</span><span class="v" id="eng-name">—</span></div>
+        <div class="row"><span class="k">大模型接入</span><span class="v" id="eng-llm">—</span></div>
+        <div class="row"><span class="k">已向量化素材</span><span class="v gold" id="eng-indexed">—</span></div>
+        <div class="row"><span class="k">支持模式</span><span class="v">主线 / 任务 / 对话 / 奖励 / 一键全剧本</span></div>
+        <div class="row"><span class="k">年龄分层</span><span class="v">4-8 亲子探索 · 8-12 少年冒险 · 12+ 沉浸剧本</span></div>
+        <div style="margin-top:18px">
+          <p style="font-size:11.5px;color:var(--text3);line-height:1.9;margin-bottom:10px">
+            配置以下环境变量即可把引擎切换为真实大模型（OpenAI 兼容接口），
+            调用失败会自动回退到离线引擎：
+          </p>
+<pre><span class="c"># Windows PowerShell</span>
+$env:<span class="g">YOUBAN_LLM_BASE_URL</span> = "https://api.deepseek.com/v1"
+$env:<span class="g">YOUBAN_LLM_API_KEY</span>  = "sk-..."
+$env:<span class="g">YOUBAN_LLM_MODEL</span>    = "deepseek-chat"</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------------- 城市故事地图 ---------------- -->
+  <section>
+    <div class="sec-h">
+      <h2>城市故事地图 <em>一个景区 = 一个故事世界</em></h2>
+      <p id="city-note">加载中……</p>
+    </div>
+    <div class="cities" id="cities"></div>
+  </section>
+
+  <!-- ---------------- 技术架构 ---------------- -->
+  <section id="stack">
+    <div class="sec-h">
+      <h2>技术架构 <em>零依赖 · 离线可跑</em></h2>
+      <p>FastAPI + SQLite + 原生前端</p>
+    </div>
+    <div class="grid3">
+      <div class="card">
+        <h4><span class="dot"></span>后端</h4>
+        <div class="row"><span class="k">框架</span><span class="v">FastAPI + Uvicorn</span></div>
+        <div class="row"><span class="k">数据库</span><span class="v">SQLite（标准库 sqlite3）</span></div>
+        <div class="row"><span class="k">数据校验</span><span class="v">Pydantic v2</span></div>
+        <div class="row"><span class="k">外部依赖</span><span class="v forest">仅 3 个</span></div>
+      </div>
+      <div class="card">
+        <h4><span class="dot"></span>引擎层</h4>
+        <div class="row"><span class="k">geo.py</span><span class="v">地理围栏</span></div>
+        <div class="row"><span class="k">story.py</span><span class="v">剧情状态与顺序解锁</span></div>
+        <div class="row"><span class="k">growth.py</span><span class="v">任务判定与成长</span></div>
+        <div class="row"><span class="k">chat.py</span><span class="v">阿游对话意图</span></div>
+        <div class="row"><span class="k">story_engine.py</span><span class="v">AI 剧本生成</span></div>
+      </div>
+      <div class="card">
+        <h4><span class="dot"></span>前端</h4>
+        <div class="row"><span class="k">C 端</span><span class="v">原生 HTML/CSS/JS</span></div>
+        <div class="row"><span class="k">B 端</span><span class="v">原生 HTML/CSS/JS</span></div>
+        <div class="row"><span class="k">构建工具</span><span class="v forest">无需构建</span></div>
+        <div class="row"><span class="k">外部 CDN</span><span class="v forest">无（完全离线）</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------------- 快速启动 ---------------- -->
+  <section id="run">
+    <div class="sec-h">
+      <h2>快速启动 <em>一条命令</em></h2>
+      <p>首次启动自动建库并播种演示数据</p>
+    </div>
+    <div class="card">
+<pre><span class="c"># 1) 安装依赖（仅 3 个包）</span>
+python -m pip install -r requirements.txt
+
+<span class="c"># 2) 启动（首次会自动播种 12 景区 / 8 剧本 / 439 条素材）</span>
+<span class="c">#    默认 8770；若被占用会自动改用其它端口，请以终端提示为准</span>
+python run.py
+
+<span class="c"># 3) 重新播种演示数据（可选）</span>
+python run.py --reseed
+
+<span class="c"># 4) 一次跑完全部五套验证（推荐）</span>
+python tests/run_all.py --start
+
+<span class="c"># 5) 只看数据体检（可选）</span>
+python tests/inspect_data.py</pre>
+      <div style="margin-top:18px" class="grid3">
+        <div class="row"><span class="k">C 端 H5</span><span class="v gold">/c/</span></div>
+        <div class="row"><span class="k">B 端后台</span><span class="v gold">/admin/</span></div>
+        <div class="row"><span class="k">API 文档</span><span class="v gold">/docs</span></div>
+      </div>
+      <p style="margin-top:16px;font-size:12px;color:var(--text3);line-height:1.95">
+        演示账号：<code>user_id = 1</code>（小小探险家 · 王家，Lv.3 探索家，成长值 361，
+        《大唐密令》第 3 章进行中 6/10 = 60%，已获 8 枚徽章）。<br>
+        演示激活码：<code>YB-XA-2026-0001</code>（西安限定）、<code>YB-BJ-2026-0002</code>（北京限定）、
+        <code>YB-HZ-2026-0003</code>（杭州限定）、<code>YB-CD-2026-0004</code>（成都限定）、
+        <code>YB-BASE-2026-0005</code>（基础款）。<br>
+        运行指标：<code>GET /api/metrics</code> —— 接口调用量 / 平均耗时 / 错误率 / 慢请求 +
+        激活数 / 剧情触发数 / 任务通过率 / AI 生成次数。
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div>游伴 AI · YOUBAN AI　|　AI 旅行潮玩平台　|　v1.0.0</div>
+    <div>AI × 潮玩 × 文旅 × 剧本游　·　产品定义：AI 潮玩 × 景区剧本游 × 儿童成长</div>
+    <div class="nex" style="margin-top:8px">下一站，世界。</div>
+  </footer>
+</div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+
+async function getJSON(url){
+  const r = await fetch(url);
+  if(!r.ok) throw new Error(url + ' -> ' + r.status);
+  return r.json();
+}
+
+async function loadMeta(){
+  try{
+    const m = await getJSON('/api/meta');
+    const c = m.counts;
+    $('s-parks').textContent      = c.parks;
+    $('s-scenarios').textContent  = c.scenarios;
+    $('s-nodes').textContent      = c.nodes;
+    $('s-tasks').textContent      = c.tasks;
+    $('s-badges').textContent     = c.badges;
+    $('s-materials').textContent  = c.materials;
+  }catch(e){
+    console.warn('meta 加载失败', e);
+    ['s-parks','s-scenarios','s-nodes','s-tasks','s-badges','s-materials']
+      .forEach(id => $(id).textContent = '—');
+  }
+}
+
+async function loadEngine(){
+  try{
+    const e = await getJSON('/api/admin/ai/engine');
+    $('eng-name').textContent = e.engine_label || e.engine;
+    $('eng-llm').textContent  = e.llm_enabled
+      ? ('已接入 · ' + (e.llm_model || ''))
+      : '未接入（使用离线规则引擎）';
+    const st = e.material_stats || {};
+    $('eng-indexed').textContent = (st.library_indexed || 0) + ' 条';
+    $('eng-material').textContent = '全库 ' + (st.library_indexed || 0) + ' 条已向量化';
+  }catch(err){
+    console.warn('engine 加载失败', err);
+    $('eng-name').textContent = '离线规则引擎';
+    $('eng-llm').textContent  = '未接入';
+  }
+}
+
+async function loadCities(){
+  try{
+    const d = await getJSON('/api/admin/park?park_id=1');
+    const list = d.all_parks || [];
+    // 拉取每个景区的剧本与点亮状态
+    const box = $('cities');
+    const details = await Promise.all(list.map(async p => {
+      try{
+        const pk = await getJSON('/api/admin/park?park_id=' + p.id);
+        return pk.park;
+      }catch(e){ return null; }
+    }));
+    box.innerHTML = details.filter(Boolean).map(p => {
+      const lit = p.lit;
+      return `<div class="city ${lit ? 'lit' : 'locked'}">
+        <div class="ci">${p.emoji || '🧭'}</div>
+        <div class="cb">
+          <b>${p.city} · ${p.name.split('·').pop().trim()}</b>
+          <span>${p.scenario_count} 个剧本 · ${p.node_count} 个剧情节点</span>
+        </div>
+      </div>`;
+    }).join('');
+    const litCount = details.filter(Boolean).filter(p => p.lit).length;
+    $('city-note').textContent =
+      `已点亮 ${litCount} / ${list.length} 座城市 · 每座城市一个故事、一个徽章、一段角色记忆`;
+  }catch(e){
+    console.warn('cities 加载失败', e);
+    $('city-note').textContent = '城市数据加载失败（请确认后端已启动）';
+  }
+}
+
+loadMeta();
+loadEngine();
+loadCities();
+</script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+
+========================================================================
+1. 系统接口
+========================================================================
+  health                     {'ok': True, 'db': 'ok', 'version': '1.0.0', 'app': '游伴 AI', 'app_en': 'YOUBAN AI', 'uptime_seconds': 145, 'requests_total': 57, 'avg_ms': 4.4, 'error_rate': 0.0}
+  app                        游伴 AI / YOUBAN AI v1.0.0
+  tagline                    带着它，去发现世界。
+  counts                     {'parks': 12, 'scenarios': 9, 'nodes': 57, 'tasks': 68, 'badges': 28, 'materials': 441, 'users': 7}
+
+========================================================================
+2. C 端 · 开箱激活 → 首页 → 探索 → 对话 → 剧本 → 我的
+========================================================================
+  activate.user              小小探险家
+  activate.device            小游 / 阿游 · 西湖限定款
+  activate.greeting          你愿意带我一起去看看这个世界吗？
+  new user_id                7
+  home.location              西安 · 大唐不夜城
+  home.device                阿游 · 皇家限定装扮
+  home.status_pill           正在西安等你 · 附近有 2 个故事待开启
+  home.today_adventure       大唐密令 第3章 密令现世 6/10 = 60%
+  home.nearby_nodes          2
+    · 附近故事点                  大雁塔 · 密令现世 (0m) STORY NODE
+    · 附近故事点                  大雁塔 · 观察砖纹 (0m) BRANCH · 支线
+  home.speech                嗨！我是阿游 👋 今天我们去哪儿冒险？
+  explore.stats              {'lit_cities': 5, 'total_cities': 12, 'badges': 8, 'stories_done': 3}
+  explore.map nodes          [('西安', 'ongoing'), ('北京', 'ongoing'), ('杭州', 'done'), ('成都', 'done'), ('贵州', 'done'), ('敦煌', 'locked'), ('云南', 'locked'), ('苏州', 'locked'), ('青岛', 'locked'), ('丽江', 'locked'), ('张家界', 'locked'), ('鸣沙山', 'locked')]
+  explore.cities             7
+    · 城市                     🏯 西安·大唐密令 [探索中] 60%
+    · 城市                     🏛️ 北京·皇家秘境 [探索中] 40%
+    · 城市                     ⛩️ 杭州·西湖奇缘 [已完成] 100%
+    · 城市                     🐼 成都·熊猫调查局 [已完成] 100%
+  scenario.title             大唐密令 / 5章 10节点
+  scenario.progress          第3章 · 6/10 = 60%
+  scenario.current_node      密令现世
+  scenario.current_tasks     [('找出塔身上 3 个特殊符号', '2/3'), ('推断密令真正想告诉你的是什么', None)]
+    第1章 长安初遇                 done · 节点状态 ['done', 'done']
+    第2章 神秘来信                 done · 节点状态 ['done', 'done']
+    第3章 密令现世                 now · 节点状态 ['active', 'active']
+    第4章 纹样之谜                 todo · 节点状态 ['locked', 'locked']
+    第5章 大唐探索家                todo · 节点状态 ['locked', 'locked']
+  chat 「你好阿游」                intent=greeting · 我在呢！你走到哪里啦？我一直在看着地图～
+  chat 「附近还有什么故事？」           intent=nearby · 就在旁边！密令现世 离我们只有 0 米。我已经把任务准备好啦～
+    └ quest_card             找出塔身上 3 个特殊符号 → 接受任务 →
+  chat 「给我讲讲大雁塔」             intent=knowledge · 好呀，我给你讲讲「大雁塔塔影的传说」——民间传说大雁塔的塔影会随时间指向不同方向，有「塔影指
+  chat 「我有点累了」               intent=tired · 累了吗？没关系的，旅行本来就要慢慢来。喝口水，我们休息五分钟～
+  locate.park                西安 · 大唐不夜城
+  locate.triggered           [('密令现世', '0m', 'STORY NODE')]
+  locate.nearby              [('大雁塔精确地理坐标', '74m')]
+  locate(杭州).park            杭州 · 西湖
+  task9.title                按正确顺序排列四条线索 [解谜] mode=keyword
+  task9.node                 终极谜题
+  submit 错误答案                pass=False · 差一点点！换个角度再试一次吧 💪 · +6
+  submit 正确答案                pass=True · 太棒了！你观察得真仔细 ✨
+    └ growth_gain            {'knowledge': 16, 'courage': 10, 'create': 6}
+    └ growth_total           417
+    └ level_up               None
+    └ node_completed         True
+    └ next_node              {'id': 10, 'name': '大唐探索家', 'kind': 'reward'}
+  计数型任务                      #3 在不夜城找回三枚古铜钱 target=3
+    第1次提交                    pass=True progress={'done': 1, 'total': 3} node_completed=False badge={'id': 9, 'name': '铜钱收藏家', 'emoji': '🪙', 'desc': '凑齐大唐不夜城三枚古铜钱', 'rarity': 'common'}
+    第2次提交                    pass=True progress={'done': 2, 'total': 3} node_completed=False badge=None
+    第3次提交                    pass=True progress={'done': 3, 'total': 3} node_completed=False badge=None
+  拍照任务(有照片)                  pass=True · 这个任务你已经完成啦 ✨
+  mine.user                  小小探险家 Lv.3 探索家 · 417
+  mine.growth                [('探索', 78), ('创造', 69), ('观察', 97), ('知识', 95), ('勇气', 78)]
+  mine.badge_stat            {'got': 8, 'total': 28}
+  mine.toy                   {'device_id': 1, 'nickname': '阿游', 'sku_name': '阿游 · 大唐限定款', 'emoji': '🏯', 'outfit': '皇家限定装扮', 'outfits': 3, 'gear': 2}
+  mine.entries               [('我的旅行地图', '5 座城市'), ('我的收藏', '13 件'), ('成就与称号', 'Lv.3'), ('设置', '')]
+  wardrobe.current           皇家限定装扮
+  wardrobe.items             6
+  equip                      {'ok': True, 'current': '熊猫限定装扮', 'type': 'outfit', 'unlocked_now': True}
+
+========================================================================
+3. B 端 · 九大模块
+========================================================================
+  dashboard.date             2026-09-23 周三
+    KPI 今日入园游客               12,486人次 down0.4% 较昨日
+    KPI 故事开启次数               3,920次 up0.5% 较昨日
+    KPI 剧本完成率                0.0% up9.9% 较上期
+    KPI 本期营收                 ¥40,600 down0.7% 较上期
+  dashboard.trend            14 天 · 游客峰值 12620
+  dashboard.funnel           [('到达景区', 12486), ('激活潮玩', 6410), ('开启故事', 3920), ('完成剧本', 2681), ('复购 / 推荐', 1045)]
+  dashboard.hot_nodes        [(1, '大唐不夜城 · 铜钱线索', 8494), (2, '抵达大雁塔', 7277), (3, '大雁塔 · 神秘来信', 6097)]
+  dashboard.timeline         ['小小探险家 完成了「在不夜城找回三枚古铜钱」', '小小探险家 完成了「在不夜城找回三枚古铜钱」', '小小探险家 完成了「在不夜城找回三枚古铜钱」']
+  scenarios.summary          {'total': 9, 'online': 6, 'review': 1, 'draft': 2}
+    · 大唐密令                   西安 · 大唐不夜城 5章/10节点 [已上线] 68%
+    · 西湖奇缘                   杭州 · 西湖 4章/5节点 [已上线] 62%
+    · 熊猫调查局                  成都 · 熊猫基地 5章/6节点 [已上线] 71%
+    · 苗岭宝藏                   贵州 · 西江千户苗寨 4章/7节点 [已上线] 74%
+    · 雨林寻踪                   云南 · 西双版纳雨林 4章/7节点 [已上线] 0%
+    · 园林谜题                   苏州 · 拙政园 4章/7节点 [已上线] 0%
+    · 皇家秘境                   北京 · 故宫 3章/5节点 [审核中] 0%
+    · 飞天密码                   敦煌 · 莫高窟 2章/4节点 [草稿] 0%
+    · 西安 · 大唐不夜城 · AI 生成剧本   西安 · 大唐不夜城 3章/6节点 [草稿] 0%
+  canvas.title               大唐密令 · 西安 [已上线]
+  canvas.chapters            [(1, '长安初遇'), (2, '神秘来信'), (3, '密令现世'), (4, '纹样之谜'), (5, '大唐探索家')]
+  canvas.nodes               10
+    · 节点1                    抵达大雁塔 [ENTRY · 入口] gps (12.0,170.0) tasks=1
+    · 节点2                    神秘来信 [STORY NODE] prev (192.0,170.0) tasks=1
+    · 节点3                    大唐不夜城 · 铜钱线索 [BRANCH · 支线] gps (372.0,300.0) tasks=2
+    · 节点4                    钟楼 · 时空回响 [STORY NODE] gps (552.0,300.0) tasks=2
+    · 节点5                    密令现世 [STORY NODE · 当前] gps (372.0,170.0) tasks=2
+    · 节点6                    观察砖纹 [BRANCH · 支线] prev (372.0,170.0) tasks=1
+    · 节点7                    城墙 · 守城之谜 [STORY NODE] gps (552.0,170.0) tasks=2
+    · 节点8                    陕西历史博物馆 · 文物密码 [STORY NODE] gps (192.0,300.0) tasks=2
+    · 节点9                    终极谜题 [STORY NODE] prev (372.0,170.0) tasks=1
+    · 节点10                   大唐探索家 [REWARD · 结算] prev (662.0,170.0) tasks=1
+  canvas.links               [(1, 2, 'gold'), (2, 5, 'gold'), (5, 10, 'gold'), (5, 6, 'purple'), (6, 3, 'purple'), (10, 7, 'forest'), (7, 4, 'gold'), (4, 8, 'gold'), (8, 9, 'gold'), (9, 10, 'gold')]
+  PUT node 5                 密令现世 radius=45 pos=(372.0,170.0)
+  POST node                  #58 编辑器新建节点
+  DELETE node                {'ok': True, 'deleted': 58}
+  tasks.summary              {'total': 68, 'done_today': 14, 'avg_minutes': 12, 'join_rate': 63}
+  tasks.types                ['观察', '寻找', '拍摄', '解谜']
+    · 任务1                    抵达大雁塔，用眼睛找到塔的层数 [观察] 大唐密令 少年冒险 88%
+    · 任务2                    找出信封上的印记图案 [观察] 大唐密令 少年冒险 84%
+    · 任务3                    在不夜城找回三枚古铜钱 [寻找] 大唐密令 少年冒险 76%
+    · 任务4                    数清钟声响了几下 [解谜] 大唐密令 少年冒险 58%
+  tasks?type=solve           20 条
+  materials.categories       [('历史典故', 128, '目标128'), ('建筑风貌', 96, '目标96'), ('非遗技艺', 42, '目标42'), ('民间传说', 61, '目标61'), ('自然地理', 78, '目标78'), ('景区地理', 34, '目标34')]
+  materials.stats            {'indexed': 439, 'parsing': 2, 'park_materials': 22}
+  materials.index_note       已完成 439 条素材的语义向量化，其中 22 条属于 西安 · 大唐不夜城。AI Story Engine 可基于此生成该景区的后续章节。
+  materials.recent           [('唐代长安城坊市舆图.pdf', '解析中'), ('大雁塔实景照片集.zip', '解析中'), ('丽江 · 各节点间距离关系（5）', '已入库'), ('青岛 · 主要游览路线（5）', '已入库')]
+  POST material              #442 唐代砖瓦烧制技艺 已入库 总入库 440
+  visitors.summary           {'active_families': 7, 'total_users': 7, 'avg_minutes': 12, 'repeat_rate': 43, 'today_visitors': 12486}
+    · 小小探险家 · 王家             西安 大唐密令 Lv.3·417 [进行中]
+    · 小小探险家                  杭州 — Lv.1·66 [新用户]
+    · 星际旅行家 · 陈家             北京 皇家秘境 Lv.4·842 [进行中]
+    · 熊猫小分队 · 李家             成都 熊猫调查局 Lv.3·560 [已完成]
+    · 西湖小诗人 · 张家             杭州 西湖奇缘 Lv.2·214 [已完成]
+    · 苗岭小勇士 · 赵家             贵州 苗岭宝藏 Lv.5·1120 [已完成]
+    · 大唐小探员 · 郑州刘家           西安 大唐密令 Lv.1·86 [新用户]
+  visitor1.growth            [('探索', 78), ('创造', 69), ('观察', 97), ('知识', 95), ('勇气', 78)]
+  visitor1.badges            8/28
+  visitor1.trail             14
+  visitor1.device            {'nickname': '阿游', 'sku_name': '阿游 · 大唐限定款', 'outfit': '熊猫限定装扮', 'status': 'activated'}
+  iptoys.summary             {'activated': 128601, 'today_activated': 128, 'online_rate': 92, 'city_editions': 5}
+  iptoys.character           阿游 · 儿童 AI 旅行伙伴
+  iptoys.editions            [('大唐密令', '西安'), ('皇家秘境', '北京'), ('西湖奇缘', '杭州'), ('熊猫调查局', '成都'), ('飞天密码', '敦煌')]
+    · SKU                    阿游 · 大唐限定款 库存3240 激活28610 90% [在售]
+    · SKU                    阿游 · 皇家限定款 库存1860 激活21340 92% [在售]
+    · SKU                    阿游 · 西湖限定款 库存2410 激活18221 88% [在售]
+    · SKU                    阿游 · 熊猫限定款 库存980 激活15470 94% [库存偏低]
+    · SKU                    阿游 · 飞天限定款 库存0 激活0 0% [未上市]
+    · SKU                    阿游 · 基础款 库存8620 激活44960 84% [在售]
+  POST edition               {'ok': True, 'id': 7, 'name': '阿游 · 苏绣限定款', 'city': '苏州', 'park_name': '苏州 · 拙政园', 'status': 'onsale', 'status_label': '在售'}
+  analytics.funnel           [('到达景区', 86420), ('激活潮玩', 44210), ('开启故事', 26840), ('完成剧本', 18120), ('复购 / 推荐', 6940)]
+  analytics.age              [('4-8岁', '29%'), ('8-12岁', '57%'), ('12岁+', '14%'), ('家长端', '9%')]
+  analytics.revenue          ¥286,400 · [('潮玩销售分成', '¥128,200'), ('景区票务分成', '¥76,400'), ('剧情会员订阅', '¥61,800'), ('IP 联名授权', '¥20,000')]
+  analytics.retention        [('首周', '100%'), ('次周', '58%'), ('第3周', '41%'), ('第4周', '33%')]
+  analytics.scale            {'parks': 12, 'scenarios': 9, 'nodes': 57, 'tasks': 68, 'submissions': 15, 'materials': 442, 'users': 7}
+  park                       西安 · 大唐不夜城 34.2186,108.9644 2剧本 16节点
+    · 分账                     C 端 · 潮玩销售: 15% / 85%
+    · 分账                     C 端 · 剧情会员: 30% / 70%
+    · 分账                     B 端 · SaaS 服务费: — / ¥12,000 / 月
+    · 分账                     联名授权: — / 按项目另行结算
+    · 分账                     结算周期: — / 每月 5 日
+  park.cooperations          [('西安文旅集团', 'IP 联名', '合作中'), ('大唐不夜城运营公司', '内容制作 + 运营分成', '合作中'), ('陕西历史博物馆', '内容授权', '洽谈中')]
+  PUT park                   {'ok': True, 'id': 1, 'updated': ['radius_m', 'tip']}
+
+========================================================================
+4. AI Story Engine（景区资料 → 剧本）
+========================================================================
+  engine                     offline-rule-engine (内置离线规则引擎) llm_enabled=False
+  capabilities               [('生成主线', '输出世界观、剧本名与章节结构'), ('生成任务', '按观察/寻找/拍摄/解谜四类生成现场任务'), ('生成对话', '生成阿游对孩子说的话与提示'), ('生成奖励', '生成徽章体系与获得条件'), ('一键生成全剧本', '完整生成并直接入库为草稿剧本')]
+  node_structure             ['入口', '古建筑', '古树', '博物馆', '山谷', '观景台', '隐藏地点', '终极任务']
+  material_stats             {'park_materials': 23, 'park_indexed': 21, 'library_indexed': 440}
+  setup_hint                 设置环境变量 YOUBAN_LLM_BASE_URL / YOUBAN_LLM_API_KEY / YOUBAN_LLM_MODEL 即可把 AI Story ……
+  generate.engine            offline-rule-engine · 0ms · mode=一键生成全剧本
+  generate.worldview         这是一个关于「选择」的故事。敦煌 · 莫高窟。  阿游带着孩子走进这片土地。根据景区资料，这里的核心是「敦煌 · 门窗格心纹样」——门窗格心纹样。敦煌 · 莫高窟的门窗格心纹样是 AI Story Engine 生成剧情节点的重要依据。本条素材记录了建筑风貌维度下的关键信息：包括历史背景、空间位置、……
+  generate.scenario          飞天密码 · 续章 / 沉浸剧本
+  generate.chapters          [(1, '敦煌初遇'), (2, '藏起来的线索'), (3, '时间的刻度'), (4, '文物的低语')]
+  generate.nodes             8
+    · 敦煌 · 出入口与集散空间          [entry] 观察 verify=keyword
+    · 敦煌 · 彩画与装饰题材（2）        [main] 寻找 verify=keyword
+    · 敦煌 · 水文与水体特征（5）        [branch] 拍摄 verify=photo
+    · 敦煌 · 材料与工具（7）          [main] 解谜 verify=keyword
+  generate.rewards           [('📚', '深度考据家', 'rare'), ('🏜️', '敦煌记忆', 'common'), ('🧩', '连环解密者', 'common'), ('🎭', '敦煌  节庆传承人', 'rare')]
+  generate.sources           [('architecture', '敦煌 · 彩画与装饰题材（2）'), ('geo', '敦煌 · 出入口与集散空间'), ('geo', '敦煌 · 地形高差与安全提示（4）'), ('heritage', '敦煌 · 材料与工具（7）'), ('history', '敦煌 · 重大历史事件（11）')]
+  generate.notes             由离线规则引擎基于 39 条本景区素材（全库 440 条已向量化素材）生成。 已入库为草稿剧本（ID 10）。
+  created_scenario_id        10
+  mode=mainline              生成主线 · 非空字段 ['worldview', 'chapters'] · 0ms
+  mode=task                  生成任务 · 非空字段 ['nodes'] · 0ms
+  mode=dialog                生成对话 · 非空字段 ['nodes'] · 0ms
+  mode=reward                生成奖励 · 非空字段 ['rewards'] · 0ms
+  ai.jobs                    [('生成奖励', '杭州 · 西湖', 0), ('生成对话', '杭州 · 西湖', 0), ('生成任务', '杭州 · 西湖', 0), ('生成主线', '杭州 · 西湖', 0), ('一键生成全剧本', '敦煌 · 莫高窟', 0), ('一键生成全剧本', '西安 · 大唐不夜城', 1)]
+  落库剧本                       飞天密码 · 续章 [草稿] 4章 8节点 7连线
+  overview.counts            {'parks': 12, 'scenarios': 10, 'nodes': 65, 'tasks': 75, 'materials': 442, 'badges': 32}
+
+========================================================================
+5. 自检结果
+========================================================================
+  通过：49 项
+  失败：0 项
+
+  注意：本脚本会真实写入数据库（激活新账号、提交任务、新建剧本/节点/素材、
+        执行 AI 生成），因此运行后演示账号状态会发生变化。
+        如需恢复到与原型一致的初始演示状态，请执行：
+            python run.py --reseed
+        或  python -c "import sys;sys.path.insert(0,'.');from app import seed;seed.seed_all(force=True)"

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>游伴 AI · 景区剧本游运营台</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<!-- ==================== 左侧导航（220px 固定） ==================== -->
+<aside class="sidebar">
+  <div class="brand">
+    <div class="logo">游</div>
+    <div class="bt">
+      <b>游伴 AI · 景区剧本游运营台</b>
+      <span>AI STORY PLATFORM · v1.0</span>
+    </div>
+  </div>
+
+  <nav class="nav" id="nav">
+    <div class="nav-group">总览</div>
+    <div class="nav-item" data-page="dashboard">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+      数据看板
+    </div>
+
+    <div class="nav-group">内容生产</div>
+    <div class="nav-item" data-page="scenarios">
+      <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M10 7h6M10 11h4"/></svg>
+      剧本管理
+    </div>
+    <div class="nav-item" data-page="editor">
+      <svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.6 7.6"/><circle cx="11" cy="11" r="2"/></svg>
+      剧情编辑器
+    </div>
+    <div class="nav-item" data-page="tasks">
+      <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      任务中心
+    </div>
+    <div class="nav-item" data-page="materials">
+      <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg>
+      内容素材库
+    </div>
+
+    <div class="nav-group">运营</div>
+    <div class="nav-item" data-page="visitors">
+      <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.4"/><path d="M2.5 21a6.5 6.5 0 0 1 13 0"/><path d="M17 8.5a3 3 0 0 1 0 5.5"/><path d="M18.5 21a6.5 6.5 0 0 0-3-5.5"/></svg>
+      游客管理
+    </div>
+    <div class="nav-item" data-page="iptoys">
+      <svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V4"/><circle cx="12" cy="3.5" r="1.5"/><circle cx="9" cy="14" r="1.2"/><circle cx="15" cy="14" r="1.2"/><path d="M9.5 17.5h5"/></svg>
+      潮玩 IP 管理
+    </div>
+
+    <div class="nav-group">数据与配置</div>
+    <div class="nav-item" data-page="analytics">
+      <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg>
+      数据分析
+    </div>
+    <div class="nav-item" data-page="observability">
+      <svg viewBox="0 0 24 24"><path d="M3 12h3.5l2-6 3.5 12 2.5-7 1.5 3H21"/></svg>
+      运行指标
+    </div>
+    <div class="nav-item" data-page="park">
+      <svg viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/><path d="M3 21h18"/></svg>
+      景区与联名
+    </div>
+  </nav>
+
+  <div class="side-foot">
+    <div class="sf-park" id="sfPark"><b>西安 · 大唐不夜城</b><br>景区版 v1.0 · 数据同步中…</div>
+    <button class="btn btn-wiz" id="btnWizard" type="button">
+      <svg viewBox="0 0 24 24"><path d="M12 3l2.4 6.6L21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4z"/></svg>
+      AI Story Engine 生成向导
+    </button>
+  </div>
+</aside>
+
+<!-- ==================== 右侧主区 ==================== -->
+<main class="main">
+  <header class="topbar">
+    <div class="tb-title" id="tbTitle">数据看板<small>实时运营概览</small></div>
+
+    <div class="tb-search">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+      <input id="tbSearch" placeholder="搜索当前列表：剧本 / 任务 / 游客…">
+      <kbd>Ctrl K</kbd>
+    </div>
+
+    <div class="tb-right">
+      <div class="tb-chip" id="parkSwitch">
+        <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5-2 6-2 6h18s-2-1-2-6a7 7 0 0 0-7-7z"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+        <span id="parkSwitchLabel">大唐不夜城景区</span>
+        <svg class="caret" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        <div class="park-menu" id="parkMenu"></div>
+      </div>
+      <div class="tb-ico" title="运营通知">
+        <svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+        <span class="dot"></span>
+      </div>
+      <div class="tb-avatar">运</div>
+    </div>
+  </header>
+
+  <div class="content" id="content">
+
+    <!-- ============ 1 数据看板 ============ -->
+    <section class="page" id="page-dashboard">
+      <div class="page-head">
+        <div><h2>数据看板</h2><p id="dashSub">实时运营概览 · 加载中…</p></div>
+        <div class="ph-actions">
+          <div class="seg" id="dashRange">
+            <div class="s" data-range="today">今日</div>
+            <div class="s active" data-range="7d">近 7 天</div>
+            <div class="s" data-range="30d">近 30 天</div>
+          </div>
+          <button class="btn" id="btnExport" type="button">
+            <svg viewBox="0 0 24 24"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 21h16"/></svg>
+            导出报表
+          </button>
+        </div>
+      </div>
+      <div id="dashBody"></div>
+    </section>
+
+    <!-- ============ 2 剧本管理 ============ -->
+    <section class="page" id="page-scenarios">
+      <div class="page-head">
+        <div><h2>剧本管理</h2><p id="scSub">管理景区 AI 剧本游内容</p></div>
+        <div class="ph-actions">
+          <button class="btn" id="btnAiWizard" type="button">
+            <svg viewBox="0 0 24 24"><path d="M12 3l2.4 6.6L21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4z"/></svg>
+            AI 生成剧本
+          </button>
+          <button class="btn btn-gold" id="btnNewScenario" type="button">
+            <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+            新建剧本
+          </button>
+        </div>
+      </div>
+      <div id="scBody"></div>
+    </section>
+
+    <!-- ============ 3 剧情编辑器 ============ -->
+    <section class="page" id="page-editor">
+      <div class="page-head">
+        <div><h2 id="edTitle">剧情编辑器</h2><p id="edSub">可视化编排 STORY NODE 与剧情分支</p></div>
+        <div class="ph-actions">
+          <select class="mini-sel" id="edPick" title="切换剧本"></select>
+          <button class="btn" id="btnPreview" type="button">
+            <svg viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+            预览
+          </button>
+          <button class="btn btn-gold" id="btnPublish" type="button">
+            <svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>
+            保存并发布
+          </button>
+        </div>
+      </div>
+      <div id="edBody"></div>
+    </section>
+
+    <!-- ============ 4 任务中心 ============ -->
+    <section class="page" id="page-tasks">
+      <div class="page-head">
+        <div><h2>任务中心</h2><p id="tkSub">配置剧情中的观察 / 寻找 / 拍摄 / 解谜任务</p></div>
+        <div class="ph-actions">
+          <button class="btn btn-gold" id="btnNewTask" type="button">
+            <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+            新建任务
+          </button>
+        </div>
+      </div>
+      <div id="tkBody"></div>
+    </section>
+
+    <!-- ============ 5 内容素材库 ============ -->
+    <section class="page" id="page-materials">
+      <div class="page-head">
+        <div><h2>内容素材库</h2><p id="mtSub">景区历史 / 建筑 / 非遗 / 传说等资料，用于 AI Story Engine 生成剧本</p></div>
+        <div class="ph-actions">
+          <button class="btn btn-gold" id="btnUploadMaterial" type="button">
+            <svg viewBox="0 0 24 24"><path d="M12 5v10M7 10l5-5 5 5"/><path d="M4 19h16"/></svg>
+            上传素材
+          </button>
+        </div>
+      </div>
+      <div id="mtBody"></div>
+    </section>
+
+    <!-- ============ 6 游客管理 ============ -->
+    <section class="page" id="page-visitors">
+      <div class="page-head">
+        <div><h2>游客管理</h2><p id="vsSub">家庭游客档案与游玩轨迹 · 点击任意行查看详情</p></div>
+        <div class="ph-actions">
+          <button class="btn" id="btnExportVisitors" type="button">
+            <svg viewBox="0 0 24 24"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 21h16"/></svg>
+            导出名单
+          </button>
+        </div>
+      </div>
+      <div id="vsBody"></div>
+    </section>
+
+    <!-- ============ 7 潮玩 IP 管理 ============ -->
+    <section class="page" id="page-iptoys">
+      <div class="page-head">
+        <div><h2>潮玩 IP 管理</h2><p id="ipSub">阿游角色体系 · 城市限定款与设备激活</p></div>
+        <div class="ph-actions">
+          <button class="btn btn-gold" id="btnNewEdition" type="button">
+            <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+            新增限定款
+          </button>
+        </div>
+      </div>
+      <div id="ipBody"></div>
+    </section>
+
+    <!-- ============ 8 数据分析 ============ -->
+    <section class="page" id="page-analytics">
+      <div class="page-head">
+        <div><h2>数据分析</h2><p id="anSub">用户行为、转化漏斗与营收结构</p></div>
+        <div class="ph-actions">
+          <div class="seg" id="anRange">
+            <div class="s" data-range="7d">近 7 天</div>
+            <div class="s active" data-range="30d">近 30 天</div>
+            <div class="s" data-range="quarter">本季度</div>
+          </div>
+        </div>
+      </div>
+      <div id="anBody"></div>
+    </section>
+
+    <!-- ============ 9 景区与联名 ============ -->
+    <section class="page" id="page-park">
+      <div class="page-head">
+        <div><h2>景区与联名</h2><p id="pkSub">景区基础信息、IP 联名合作与分账配置</p></div>
+        <div class="ph-actions">
+          <button class="btn btn-gold" id="btnSavePark" type="button">
+            <svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>
+            保存配置
+          </button>
+        </div>
+      </div>
+      <div id="pkBody"></div>
+    </section>
+
+    <!-- ============ 10 运行指标 ============ -->
+    <section class="page" id="page-observability">
+      <div class="page-head">
+        <div><h2>运行指标</h2><p id="obSub">接口性能与业务计数 · 加载中…</p></div>
+        <div class="ph-actions">
+          <span class="switch switch-chip" id="obAuto" role="button" tabindex="0" title="每 5 秒自动刷新">
+            <span class="tr"></span><span id="obAutoLabel">每 5 秒自动刷新</span>
+          </span>
+          <button class="btn" id="btnObsRefresh" type="button">
+            <svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 4v5h-5"/></svg>
+            刷新
+          </button>
+        </div>
+      </div>
+      <div id="obBody"></div>
+    </section>
+
+  </div>
+</main>
+
+<!-- ==================== 10 AI Story Engine 生成向导（全屏） ==================== -->
+<div class="wizard" id="wizard" aria-hidden="true">
+  <div class="wiz-shell">
+    <div class="wiz-top">
+      <div class="wiz-brand">
+        <div class="logo-s">✦</div>
+        <div><b>AI Story Engine · 剧本生成向导</b><span>景区资料 → 世界观 → 主线 / 任务 / 对话 / 奖励 → 入库草稿</span></div>
+      </div>
+      <div class="wiz-engine" id="wizEngine"></div>
+      <button class="wiz-close" id="wizClose" type="button" title="关闭向导">✕</button>
+    </div>
+    <div class="wiz-steps" id="wizSteps"></div>
+    <div class="wiz-body" id="wizBody"></div>
+    <div class="wiz-foot" id="wizFoot"></div>
+  </div>
+</div>
+
+<!-- ==================== 全局容器：抽屉 / 遮罩 / 弹窗 / Toast ==================== -->
+<div id="overlay"></div>
+<aside id="drawer"></aside>
+<div id="modalRoot"></div>
+<div id="toastRoot"></div>
+
+<noscript><div class="noscript">本后台需要启用 JavaScript 才能运行。</div></noscript>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0B1020">
+<meta name="description" content="游伴 AI · 带着它，去发现世界。AI 潮玩 × 景区剧本游 × 儿童成长。">
+<title>游伴 AI · 旅行潮玩</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<div class="stage">
+  <div class="phone" id="phone">
+    <!-- 刘海 + 状态栏（桌面手机外框） -->
+    <div class="notch"></div>
+    <div class="statusbar">
+      <span>9:41</span>
+      <span class="sb-right"><span class="bars"><i></i><i></i><i></i><i></i></span>5G<span class="sb-batt"><i></i></span></span>
+    </div>
+
+    <!-- ===================== 五大主视图 ===================== -->
+    <div class="screens">
+
+      <!-- Tab1 旅伴 · 首页 -->
+      <section class="screen active" id="s-home" data-tab="home">
+        <div class="view" id="view-home"></div>
+      </section>
+
+      <!-- Tab2 探索 · 我的故事地图 -->
+      <section class="screen" id="s-explore" data-tab="explore">
+        <div class="view" id="view-explore"></div>
+      </section>
+
+      <!-- Tab3 对话 · AI 陪伴 -->
+      <section class="screen" id="s-chat" data-tab="chat">
+        <div class="view" id="view-chat"></div>
+      </section>
+
+      <!-- Tab4 剧本 -->
+      <section class="screen" id="s-story" data-tab="story">
+        <div class="view" id="view-story"></div>
+      </section>
+
+      <!-- Tab5 我的 -->
+      <section class="screen" id="s-mine" data-tab="mine">
+        <div class="view" id="view-mine"></div>
+      </section>
+
+    </div>
+
+    <!-- 聊天输入栏（固定在手机底部上方） -->
+    <div class="chat-input" id="chatInput">
+      <button class="voice" id="btnVoice" title="语音输入" aria-label="语音输入">
+        <svg class="ic" style="width:18px;height:18px" viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/></svg>
+      </button>
+      <button class="locate" id="btnLocate" title="上报位置，触发附近剧情" aria-label="位置上报">
+        <svg class="ic" style="width:18px;height:18px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="8"/></svg>
+      </button>
+      <input type="text" id="chatField" placeholder="和阿游说点什么…" autocomplete="off" maxlength="60">
+      <button class="send" id="btnSend" title="发送" aria-label="发送">
+        <svg class="ic" style="width:19px;height:19px" viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg>
+      </button>
+    </div>
+
+    <!-- 底部 Tab -->
+    <nav class="tabbar">
+      <div class="tab active" data-tab="home">
+        <svg class="t-ic ic" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9.5 21v-6h5v6"/></svg>
+        <span>旅伴</span>
+      </div>
+      <div class="tab" data-tab="explore">
+        <svg class="t-ic ic" viewBox="0 0 24 24"><path d="M3 6.5 9 4l6 2.5L21 4v13.5L15 20l-6-2.5L3 20z"/><path d="M9 4v13.5"/><path d="M15 6.5V20"/></svg>
+        <span>探索</span>
+      </div>
+      <div class="tab center" data-tab="chat">
+        <div class="t-ic-wrap"><svg class="t-ic ic" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.5 9 9 0 0 1-3.9-.9L3 21l1.9-5.1A8.4 8.4 0 0 1 4 11.5 8.4 8.4 0 0 1 12.5 3 8.4 8.4 0 0 1 21 11.5z"/></svg></div>
+        <span>对话</span>
+      </div>
+      <div class="tab" data-tab="story">
+        <svg class="t-ic ic" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M10 7h6M10 11h4"/></svg>
+        <span>剧本</span>
+      </div>
+      <div class="tab" data-tab="mine">
+        <svg class="t-ic ic" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+        <span>我的</span>
+      </div>
+    </nav>
+
+    <!-- ===================== 子页面：节点剧情 ===================== -->
+    <section class="subpage" id="page-node">
+      <div class="navbar">
+        <div class="nav-back" id="nodeBack" role="button" aria-label="返回">
+          <svg class="ic" style="width:18px;height:18px" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </div>
+        <b id="nodeNavTitle">剧情节点</b>
+        <span class="nav-sub" id="nodeNavSub">STORY NODE</span>
+      </div>
+      <div class="subpage-scroll" id="nodeBody"></div>
+    </section>
+
+    <!-- ===================== 子页面：家长模式 · 成长报告 ===================== -->
+    <section class="subpage" id="page-parent">
+      <div class="navbar">
+        <div class="nav-back" id="parentBack" role="button" aria-label="返回">
+          <svg class="ic" style="width:18px;height:18px" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </div>
+        <b id="parentNavTitle">家长模式</b>
+        <span class="nav-sub" id="parentNavSub">成长报告</span>
+      </div>
+      <div class="subpage-scroll" id="parentBody"></div>
+    </section>
+
+    <!-- ===================== 换装抽屉 ===================== -->
+    <div class="drawer-mask" id="drawerMask">
+      <div class="drawer">
+        <div class="drawer-head">
+          <div class="nav-back" id="drawerBack" role="button" aria-label="返回">
+            <svg class="ic" style="width:18px;height:18px" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+          </div>
+          <b>我的潮玩 · 换装</b>
+          <i id="drawerSub">装扮</i>
+        </div>
+        <div class="drawer-body" id="drawerBody"></div>
+      </div>
+    </div>
+
+    <!-- ===================== 开箱激活引导 ===================== -->
+    <div class="onboard" id="onboard">
+      <div class="ob-inner">
+        <div class="ob-glow"></div>
+        <div class="ob-mascot" id="obMascot">🧭</div>
+        <div class="ob-kicker">TAKE IT · TRAVEL · STORY</div>
+        <h2>你愿意带我一起去<br>看看这个世界吗？</h2>
+        <p>给我取个名字，我们的故事就开始了</p>
+
+        <div class="ob-input">
+          <input id="obName" type="text" placeholder="给伙伴取名，如「阿游」" maxlength="8" value="阿游">
+        </div>
+        <div class="ob-input ob-code">
+          <input id="obCode" type="text" placeholder="输入潮玩底部的激活码" value="YB-XA-2026-0001" spellcheck="false" autocomplete="off">
+          <button type="button" class="ob-fill" id="obFill">一键填入</button>
+        </div>
+        <div class="ob-hintline">演示激活码：西安 YB-XA-2026-0001 / 北京 YB-BJ-2026-0002 / 杭州 YB-HZ-2026-0003</div>
+
+        <button class="btn-gold" id="obStart">开始冒险 →</button>
+        <div class="ob-skip" id="obSkip">跳过，先逛逛</div>
+      </div>
+    </div>
+
+    <!-- 加载遮罩 -->
+    <div id="loading"><div class="ring"></div><p id="loadingText">正在连接阿游…</p></div>
+
+    <!-- Toast -->
+    <div id="toast-wrap"></div>
+
+    <!-- 徽章解锁弹窗 -->
+    <div class="modal-mask" id="modalMask">
+      <div class="badge-pop" id="badgePop"></div>
+    </div>
+  </div>
+</div>
+
+<div class="footer-note">带着它，去发现世界 · <em>YOUBAN AI</em></div>
+
+<script src="app.js"></script>
+</body>
+</html>

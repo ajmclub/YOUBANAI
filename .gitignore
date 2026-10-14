@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# 运行时数据（首次启动自动建库并播种）
+data/*.db
+data/*.db-wal
+data/*.db-shm
+
+# 本地配置 / 密钥
+.env
+.env.*
+*.local
+
+# 临时产物
+*.log
+.DS_Store
+Thumbs.db

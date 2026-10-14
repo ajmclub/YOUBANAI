@@ -1,0 +1,113 @@
+==============================================================================
+游伴 AI · 前后端契约一致性检查
+==============================================================================
+
+【后端 OpenAPI 路由】共 43 条，其中 /api/ 接口 42 条
+  GET     /api/admin/ai/engine
+  POST    /api/admin/ai/generate
+  GET     /api/admin/ai/jobs
+  GET     /api/admin/analytics
+  GET     /api/admin/dashboard
+  GET     /api/admin/iptoys
+  POST    /api/admin/iptoys/editions
+  GET     /api/admin/materials
+  POST    /api/admin/materials
+  POST    /api/admin/nodes
+  DELETE  /api/admin/nodes/{node_id}
+  PUT     /api/admin/nodes/{node_id}
+  GET     /api/admin/observability
+  GET     /api/admin/overview
+  GET     /api/admin/park
+  PUT     /api/admin/park/{park_id}
+  GET     /api/admin/scenarios
+  POST    /api/admin/scenarios
+  GET     /api/admin/scenarios/{scenario_id}
+  GET     /api/admin/tasks
+  POST    /api/admin/tasks
+  PUT     /api/admin/tasks/{task_id}
+  GET     /api/admin/visitors
+  GET     /api/admin/visitors/{user_id}
+  POST    /api/c/activate
+  POST    /api/c/chat
+  GET     /api/c/demo
+  GET     /api/c/explore
+  GET     /api/c/home
+  POST    /api/c/locate
+  GET     /api/c/mine
+  GET     /api/c/parent/report
+  GET     /api/c/parent/reports
+  GET     /api/c/parent/summary
+  GET     /api/c/scenario/{scenario_id}
+  GET     /api/c/session
+  GET     /api/c/task/{task_id}
+  POST    /api/c/task/{task_id}/submit
+  GET     /api/c/wardrobe
+  POST    /api/c/wardrobe/equip
+  GET     /api/meta
+  GET     /api/metrics
+
+【C 端 H5】app.js　接口引用 13 个
+  OK  POST   /api/c/activate
+  OK  POST   /api/c/chat
+  OK  GET    /api/c/explore
+  OK  GET    /api/c/home
+  OK  POST   /api/c/locate
+  OK  GET    /api/c/mine
+  OK  GET    /api/c/parent/report
+  OK  GET    /api/c/parent/reports
+  OK  GET    /api/c/parent/summary
+  OK  GET    /api/c/scenario/{}
+  OK  GET    /api/c/task/{}
+  OK  GET    /api/c/wardrobe
+  OK  POST   /api/c/wardrobe/equip
+
+【B 端后台】app.js　接口引用 0 个
+
+【项目门户】index.html　接口引用 3 个
+  OK  GET    /api/admin/ai/engine
+  OK  GET    /api/admin/park
+  OK  GET    /api/meta
+
+【响应字段抽查】前端是否使用了后端返回的关键字段
+
+  [C 端 H5] 使用 15/17 个关键字段
+    未直接引用（可能由其它字段派生）: current_tasks, state_label
+
+  [B 端后台] 使用 20/20 个关键字段
+
+【后端接口被前端使用情况】16/42 条被引用
+  未被前端调用（多为管理/调试接口，属正常）:
+    · POST /api/admin/ai/generate
+    · GET /api/admin/ai/jobs
+    · GET /api/admin/analytics
+    · GET /api/admin/dashboard
+    · GET /api/admin/iptoys
+    · POST /api/admin/iptoys/editions
+    · GET /api/admin/materials
+    · POST /api/admin/materials
+    · POST /api/admin/nodes
+    · DELETE /api/admin/nodes/{node_id}
+    · PUT /api/admin/nodes/{node_id}
+    · GET /api/admin/observability
+    · GET /api/admin/overview
+    · PUT /api/admin/park/{park_id}
+    · GET /api/admin/scenarios
+    · POST /api/admin/scenarios
+    · GET /api/admin/scenarios/{scenario_id}
+    · GET /api/admin/tasks
+    · POST /api/admin/tasks
+    · PUT /api/admin/tasks/{task_id}
+    · GET /api/admin/visitors
+    · GET /api/admin/visitors/{user_id}
+    · GET /api/c/demo
+    · GET /api/c/session
+    · POST /api/c/task/{task_id}/submit
+    · GET /api/metrics
+
+==============================================================================
+【结论】
+  前端接口引用：16 处（去重 16 个「方法+路径」组合）
+  后端 /api/ 路由：42 条
+  契约问题：0 处
+    ✓ 前端调用的每一个接口路径与方法，后端均存在
+==============================================================================

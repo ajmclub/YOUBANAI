@@ -1,0 +1,11 @@
+# 游伴 AI (YOUBAN AI) · 运行依赖
+#
+# 本项目仅依赖 FastAPI 生态与 Python 标准库（sqlite3 / urllib / json）。
+# 数据库使用 Python 内置 sqlite3，无需额外安装数据库服务。
+
+fastapi>=0.110
+uvicorn>=0.27
+pydantic>=2.6
+
+# 可选：仅当需要使用 /c/ 的换装等前端资源时无需额外依赖。
+# 可选：接入真实大模型时使用标准库 urllib 调用 OpenAI 兼容接口，同样无需额外依赖。
